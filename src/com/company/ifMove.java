@@ -4,10 +4,11 @@ import java.util.Random;
 
 public interface ifMove {
 
+    void move();
 
-    void move
 
-    {
+
+
 
 
 

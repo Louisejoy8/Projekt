@@ -15,7 +15,7 @@ public class Input {
             String ss = scan.next();
             int i = Integer.parseInt(ss);
             if (i > 0) {
-                System.out.println(i);
+//                System.out.println(i);
                 return i;
 
             } else {

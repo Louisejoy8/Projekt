@@ -1,10 +1,9 @@
 package com.company;
 
-import com.sun.jdi.LocalVariable;
 
 import java.util.Random;
 
-public class Animal {
+public abstract class Animal implements ifMove {
 
 
     int speed;
@@ -26,52 +25,66 @@ public class Animal {
     void print() {
     }
 
-    void move() {
+    public void move(Location location) {
         Random rand = new Random();
-        int r = rand.nextInt((4) + 1);
+        int r = rand.nextInt((4));
 
-        int newXUp = location.getX() + 1;
-        int newYUp = location.getY() + 1;
-        int newXDown = location.getX() - 1;
-        int newYDown = location.getY() - 1;
+        int newRight = location.getX() + 1;
+        int newUp = location.getY() + 1;
+        int newLeft = location.getX() - 1;
+        int newDown = location.getY() - 1;
         int plan = 10;
         switch (r) {
 
+            case 0:
+                if (newRight < plan) {
+                    location.setX(newRight); //newRight
+                } else if (newDown >= 0) {
+                    location.setY(newDown);
+                } else {
+                    location.setX(newLeft);
+                }
+                break;
 
             case 1:
-                if (plan > newXUp) {
-                    location.setX(location.getX() + 1);
-                } else if (plan > newYUp) {
-                    location.setY(location.getY() - 1);
+                if (newUp < plan) {
+                    location.setY(newUp);
+                } else if (newRight < plan) {
+                    location.setX(newRight);
                 } else {
-                    location.setX(location.getX() - 1);
+                    location.setY(newDown);
                 }
                 break;
 
             case 2:
-                location.setY(location.getY() + 1);
+                if (newLeft >= 0) {
+                    location.setX(newLeft);
+                } else if (newUp < plan) {
+                    location.setY(newUp);
+                } else {
+                    location.setX(newRight);
+                }
                 break;
 
             case 3:
-                if (plan > newXDown) {
-                    location.setX(location.getX() - 1);
-                } else if (plan > newYDown) {
-                    location.setY(location.getY() + 1);
+                if (newDown >= 0) {
+                    location.setY(newDown);
+                } else if (newLeft >= 0) {
+                    location.setX(newLeft);
                 } else {
-                    location.setX(location.getX() + 1);
+                    location.setY(newUp);
                 }
-
-                break;
-
-            case 4:
-                location.setY(location.getY() - 1);
                 break;
 
             default:
                 break;
 
         }
+
+        }
     }
 
 
-}
+
+
+

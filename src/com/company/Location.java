@@ -1,6 +1,7 @@
 package com.company;
 
 public class Location {
+
     int x;
     int y;
 
@@ -14,12 +15,13 @@ public class Location {
         setY(y);
     }
 
+
     public int getX() {
         return x;
     }
 
     public void setX(int x) {
-        if(x > 0)
+        if(x >= 0)  //Ändrade från y > 0
             this.x = x;
         else
             this.x = 1;
@@ -30,7 +32,7 @@ public class Location {
     }
 
     public void setY(int y) {
-        if(y > 0)
+        if(y >= 0)      //Ändrade från y > 0
             this.y = y;
         else
             this.y = 1;
