@@ -1,8 +1,7 @@
 package com.company;
 
-import java.util.Arrays;
 
-public class GUI {
+public class GUI{
 
     Input input = new Input();
     int maxGbSize = 50;
@@ -10,6 +9,7 @@ public class GUI {
 
     int size;
     String[][] gui;
+
 
 
     GUI(){
@@ -25,6 +25,10 @@ public class GUI {
         return size;
     }
 
+    public String[][] getGui() {
+        return gui;
+    }
+
     public void setSize(int size) {
         this.size = size;
     }
@@ -35,6 +39,10 @@ public class GUI {
 
     public void setCheetah(Location location){
        gui[location.getX()][location.getY()] = "C";
+    }
+
+    public void reset(Location location){
+        gui[location.getX()][location.getY()] = "-";
     }
 
     void print() {

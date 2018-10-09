@@ -1,10 +1,7 @@
 package com.company;
 
 import java.io.Console;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Application {
 
@@ -15,7 +12,7 @@ public class Application {
     Status status = Status.STOP;
     Zebra[] z;
     Cheetah[] c;
-    int m = 1;
+    int round = 1;
 //    status = Status.STOP;
 
 
@@ -44,9 +41,6 @@ public class Application {
                         zebra.print();
                     }
 
-
-
-
                     int valueC = numbersCheetah();
                     c = new Cheetah[valueC];
                     for (int i = 0; i < valueC; i++) {
@@ -58,7 +52,7 @@ public class Application {
                         cheetah.print();
                     }
 
-                    if (max <= z.length + c.length) {
+                    if (max < z.length + c.length) {
                         System.out.println("Too many animals. Max 100.");
                     } else if (z.length < c.length) {
                         System.out.println("Too many cheethas.");
@@ -77,71 +71,99 @@ public class Application {
 
 
             while (status == Status.START) {
+
                 //Kolla på lösning för utskift
 //                z[1] = null;
 //                if(z[1] == null) {
 //                    System.out.println("HEJASJHDHASD");
 //                }
+
+                System.out.println("Round: " + round);
+
+//                gui.fill();
+                Scanner hej = new Scanner(System.in);
+//                int j=0;
+//                int testsped= c[j].getSpeed();
+//                System.out.print(testsped);
+//                while (j <= c[j].getSpeed()) {
+//                    gui.fill();
+////                    gui.reset(c[j].getLocation());
+//                    moveChita();
+//                    j++;
+//                }
+                for (int j = 0; j < c.length; j++) {
+                    if(j < c[j].getSpeed()) {
+                        gui.fill();
+//                    gui.reset(c[j].getLocation());
+                     moveChita();
+                        System.out.println(j + "getfullc" + c[j].getFull());
+//                        if(c[j].getFull() == true) {
+//                            c[j].setTillHungry(c[j].getTillHungry()-1);
+//                        }
+
+                    }else {}
+                }
                 for (int i = 0; i < z.length; i++) {
+                    if(i < z[i].getSpeed()) {
+//                    gui.reset(z[i].getLocation());
+                        moveZebra();
+                    }else {}
+                }
+
+
+//kalas på timer
+
+                gui.print();
+                hej.nextLine();
+
+                // TODO
+
+
+//                for (int i = 0; i < z.length; i++) {
+//                    for (int j = 0; j < c.length; j++) {
+//                        if (z[i].getLocation().getX() == c[j].getLocation().getX() && z[i].getLocation().getY() == c[j].getLocation().getY()) {
+//                            //&& c[j].getFull() == false
+//                            z[i].setAlive(false);
+//                            z[i].setDead();
+//                            c[j].setFull(true);
+//                            System.out.print("-----------------------------------------C" + j + " äter " + "Z" + i + "\n");
+//
+//                        }
+//
+//
+//
+//                        if(c[j].getFull() == true && round%4 == 0){
+//                            c[j].setFull(false);
+//                            System.out.print(j + "Hungriga");
+//                        }
+//
+//
+//                    }
+//                }
+
+
+//                System.out.println("Efter måltid!");
+//                for (int i = 0; i < z.length; i++) {
+//
+//                    if (z[i].getAlive() == true) {
+//                        System.out.print(i + " ");
+//                        z[i].print();
+//                    }
+//                }
+
+                int zebrasAlive = 0;
+                for (int i = 0; i < z.length; i++) {    //Går ingom z[] och ser hur många objekt som har värdet alive == true
                     if (z[i].getAlive() == true) {
-                        z[i].move();
-                        System.out.print(i);
-                        z[i].print();
+                        zebrasAlive++;
                     }
                 }
-
-                for (int i = 0; i < c.length; i++) {
-                    c[i].move();
-                    c[i].print();
+                if (zebrasAlive < c.length) {   //Om zebrasAlive < antalet i c
+                    status = Status.STOP;       //status ändras till STOP och programmet startar om
                 }
-
-                for (int i = 0; i < z.length; i++) {
-                    for (int j = 0; j < c.length; j++) {
-                        if (z[i].getLocation().getX() == c[j].getLocation().getX() && z[i].getLocation().getY() == c[j].getLocation().getY()) {
-                            //&& c[j].getFull() == false
-                            z[i].setAlive(false);
-                            z[i].setLocation(new Location(99,99));
-                            c[j].setFull(true);
-                            System.out.print("C: " + j + "Äter" + "Z " + i + "\n");
-
-                        }
-
-                        /*
-
-
-                        if(c[j].getFull() == true && m%4 == 0){
-                            c[j].setFull(false);
-                            System.out.print(j + "Hungriga");
-                        }
-                        */
-
-                    }
-                }
-
-                int a = 0;
-                for (int i = 0; i < z.length; i++) {
-                    if(z[i].getAlive() == true) {
-                        a++;
-                    }
-                }
-
-
-                for (int i = 0; i < z.length; i++) {
-                    if (z[i].getAlive() == true) {
-                        System.out.println();
-                        System.out.print(i);
-                        z[i].print();
-                    }
-                }
-
-                if (a < c.length) {
-                    status = Status.STOP;
-                }
-                m++;
-                System.out.print(m);
-                for (int i = 0; i < 1; ++i) System.out.println();
+                round++;
+                System.out.println();
+                System.out.println();
             }
-
             status = Status.STOP;
         }
     }
@@ -149,6 +171,7 @@ public class Application {
 
     //reprint ej mer än 100 djur
 //
+
 
 
     int numbersZebra() {
@@ -172,6 +195,49 @@ public class Application {
         return cheetah;
 
     }
+
+    public void colition() {
+        for (int i = 0; i < z.length; i++) {
+            for (int j = 0; j < c.length; j++) {
+                if (z[i].getLocation().getX() == c[j].getLocation().getX() && z[i].getLocation().getY() == c[j].getLocation().getY() && c[j].getFull() == 0) {
+                    //&& c[j].getFull() == false
+                    z[i].setAlive(false);
+                    z[i].setDead();
+                    c[j].setFull(5);
+                    System.out.print("-----------------------------------------C" + j + " äter " + "Z" + i + "\n");
+
+                }
+            }
+        }
+    }
+
+    public void moveChita() {
+        for (int j = 0; j < c.length; j++) {
+            c[j].move();
+            gui.setCheetah(new Location(c[j].getLocation().getX(), c[j].getLocation().getY()));
+
+            System.out.print(j + " ");
+            if(c[j].getFull() > 0) {
+                c[j].setFull(c[j].getFull() - 1);
+            }
+            c[j].print();
+            colition();
+        }
+    }
+
+    public void moveZebra() {
+        for (int i = 0; i < z.length; i++) {  //om z.getAlive == true z.move()
+            if (z[i].getAlive() == true) {
+                z[i].move();
+                gui.setZebra(new Location(z[i].getLocation().getX(), z[i].getLocation().getY()));
+
+                 System.out.print(i + " ");
+                z[i].print();
+                colition();
+            }
+        }
+    }
+
 
 //    int gameboardSize(){
 //

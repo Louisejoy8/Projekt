@@ -5,7 +5,6 @@ import java.util.Random;
 
 public abstract class Animal implements ifMove {
 
-
     int speed;
     Location location;
 
@@ -23,6 +22,8 @@ public abstract class Animal implements ifMove {
     }
 
     void print() {
+
+
     }
 
     public void move(Location location) {
@@ -81,8 +82,8 @@ public abstract class Animal implements ifMove {
 
         }
 
-        }
     }
+}
 
 
 

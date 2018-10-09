@@ -7,7 +7,7 @@ public class Zebra extends Animal {
     private int speed = 1;
     Location location;
     boolean alive = true;
-
+    GUI gui = new GUI();
 
     Zebra(){
         Random rand = new Random();
@@ -25,9 +25,18 @@ public class Zebra extends Animal {
         this.alive = alive;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
     @Override
     public Location getLocation() {
         return location;
+
+    }
+
+    public void setDead(){
+        setLocation(new Location(666,666));
     }
 
     @Override
@@ -35,13 +44,17 @@ public class Zebra extends Animal {
         this.location = location;
     }
 
+
+
     @Override
     void print(){
         System.out.println("Zebra " + "Location: " + location.getX() + ", " + location.getY());
+
     }
 
     @Override
     public void move() {
     super.move(location);
+
     }
 }

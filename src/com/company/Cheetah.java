@@ -6,7 +6,8 @@ public class Cheetah extends Animal{
 
         private int speed = 2;
         private Location location;
-        boolean full = false;
+        private int full = 0;
+
 
         Cheetah(){
             Random rand = new Random();
@@ -25,17 +26,24 @@ public class Cheetah extends Animal{
         this.location = location;
     }
 
-    public void setFull(boolean full){
+    public void setFull(int full){
             this.full = full;
     }
 
-    public boolean getFull(){
+    public int getFull(){
             return full;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+
+
+
     @Override
         void print(){
-            System.out.println("Cheetah "+"Location: " + location.getX() + ", " + location.getY());
+            System.out.println("Cheetah " + "Location: " + location.getX() + ", " + location.getY());
         }
 
     @Override
